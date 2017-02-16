@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .testnav {
+            width: 800px;
+            height: 50px;
+            margin: 100px auto;
+        }
+
+        .testnav ul {
+            list-style: none;
+        }
+
+        .testnav li {
+            float: left;
+            width: 78px;
+            height: 50px;
+            border: 1px solid #123123;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .chose {
+            background-color: #345567;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="testnav">
+    <ul>
+        <li id="testli">test1</li>
+        <li>test2</li>
+        <li>test3</li>
+        <li>test4</li>
+        <li>test5</li>
+        <li>test6</li>
+        <li>test7</li>
+        <li>test8</li>
+        <li>test9</li>
+        <li>test10</li>
+    </ul>
+</nav>
+</body>
+</html>
+<script>
+
+    (function () {
+        var testnav = document.querySelector(".testnav");
+        var lilist = testnav.querySelectorAll("li");
+        for (var key = 0; key < lilist.length; key++) {
+            lilist[key].addEventListener('click', function () {
+//                for (var key1 = 0; key1 < lilist.length; key1++) {
+//                    if (lilist[key1].classList.contains("chose")) {
+//                        lilist[key1].classList.remove("chose");
+//                    }
+//                }
+//                this.classList.add("chose");
+                var st = this.classList.contains("chose");
+                this.classList.toggle("chose", !st);
+            });
+        }
+    })()
+
+</script>

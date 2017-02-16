@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .div1 {
+            width: 100%;
+            height: 300px;
+            background-color: #ff0;
+            /*display: none;*/
+            position: absolute;
+        }
+    </style>
+    <script>
+
+
+        var ss = "btn1"
+
+        $(document).ready(function () {
+
+            $("#" + ss).click(function () {
+
+//                        $(".div1").show(300);
+                alert(1);
+
+            });
+
+        });
+
+        $(function () {
+
+//            function person(name,age) {
+//                this.name = name;
+//                this.age = age;
+//                this.showage = function(){
+//                    alert(this.age);
+//                }
+//            }
+//            var obj = new person("张三",30);
+//
+//            var obj1 = {
+//                name:"张4",
+//                age:40,
+//                showage:function(){
+//                    alert(this.age);
+//                }
+//            }
+//            obj.showage();
+//            obj1.showage();
+//            obj1["showage"]();
+
+            $(".div1 a[href $= 'a.com']").css("background-color", "#123123");
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn1"/>
+
+<div class="div1">
+    <a href="http://www.baidu.com">百度</a>
+    <a href="http://www.taobao.com">淘宝</a>
+    <a href="http://www.alibaba.com">阿里</a>
+    <a href="http://www.jd.com">京东</a>
+</div>
+<!--<a href="http://www.baidu.com">百度</a>-->
+</body>
+</html>

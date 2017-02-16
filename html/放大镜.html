@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .yuantu {
+            margin: 100px;
+            position: relative;
+        }
+
+        .xiaotu {
+            width: 350px;
+            height: 350px;
+            position: absolute;
+            border: 1px solid #ccc;
+        }
+
+        .big {
+            width: 450px;
+            height: 450px;
+            border: 1px solid #ccc;
+            position: absolute;
+            left: 360px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .xiaotu img {
+            position: absolute;
+        }
+
+        .mask {
+            width: 197px;
+            height: 197px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            cursor: move;
+            display: none;
+        }
+
+        .big img{
+            position: absolute;
+        }
+
+    </style>
+
+    <script>
+
+        window.onload = function () {
+
+            var xiaotudo = document.getElementsByClassName("xiaotu")[0];
+            var bigdo = document.getElementsByClassName("big")[0];
+            var maskdo = document.getElementsByClassName("mask")[0];
+            var yuantudo = document.getElementsByClassName("yuantu")[0];
+
+            xiaotudo.onmouseover = function () {
+                bigdo.style.display = "block";
+                maskdo.style.display = "block";
+            }
+            xiaotudo.onmouseout = function () {
+                bigdo.style.display = "none";
+                maskdo.style.display = "none";
+            }
+            xiaotudo.onmousemove = function (event) {
+                var event = event || window.event;
+                var dx = event.clientX - yuantudo.offsetLeft - maskdo.offsetWidth / 2;
+                var dy = event.clientY - yuantudo.offsetTop - maskdo.offsetHeight / 2;
+                if (dx < 0) {
+                    dx = 0;
+                }
+                if (dy < 0) {
+                    dy = 0;
+                }
+                if (dx > xiaotudo.offsetWidth - maskdo.offsetWidth - 1) {
+                    dx = xiaotudo.offsetWidth - maskdo.offsetWidth - 1;
+                }
+                if (dy > xiaotudo.offsetHeight - maskdo.offsetHeight - 1) {
+                    dy = xiaotudo.offsetWidth - maskdo.offsetWidth - 1;
+                }
+                maskdo.style.left = dx + "px";
+                maskdo.style.top = dy + "px";
+
+                bigdo.children[0].style.left = - parseInt(dx/xiaotudo.offsetWidth*800)+"px";
+                bigdo.children[0].style.top = - parseInt(dy/xiaotudo.offsetHeight*800)+"px";
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+<div class="yuantu">
+    <div class="xiaotu">
+        <img src="../images/001.jpg" alt=""/>
+        <div class="mask"></div>
+    </div>
+    <div class="big">
+        <img src="../images/0001.jpg" alt=""/>
+    </div>
+</div>
+</body>
+</html>

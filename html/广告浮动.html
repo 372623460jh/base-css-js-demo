@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .w {
+            /*版心 提取 */
+            width: 1210px;
+            margin: 0 auto;
+            position: fixed;
+        }
+
+        .neir {
+            height: 3000px;
+            background-color: #ccc;
+        }
+
+        #pic {
+            position: absolute;
+        }
+    </style>
+    <script>
+
+        window.onload = function () {
+
+            alert(count(201612171112300911052672));
+
+            //通过移动小数点  扩大倍数
+            function scienceNum(value) {
+                if (!isEmpty(value)) {
+                    var num = 0;
+                    if ((num = value.indexOf('E')) != -1 || (num = value.indexOf('e')) != -1) {
+                        var doubleStr = value.substring(0, num);
+                        var eStr = value.substring(num + 1, value.length);
+                        eStr = parseInt(eStr);
+                        var doubleStrList = doubleStr.split('.');
+                        var doubleStr1 = doubleStrList[0];
+                        var doubleStr2 = doubleStrList[1];
+
+                        if (doubleStr2.length > eStr) {
+                            var nums = doubleStr2.substring(0, eStr);
+                            var nume = doubleStr2.substring(eStr, doubleStr2.length);
+                            doubleStr = doubleStr1 + nums + '.' + nume;
+                        }
+                        else if (doubleStr2.length < eStr) {
+                            var indexNum = eStr - doubleStr2.length;
+                            //用0补齐
+                            var str = '';
+                            for (var i = 0; i < indexNum; i++) {
+                                str += '0';
+                            }
+                            doubleStr = doubleStr1 + doubleStr2 + str;
+                        }
+                        else {
+                            doubleStr = doubleStr1 + doubleStr2;
+                        }
+                        value = doubleStr;
+                        //千分位
+                    }
+                }
+                return value;
+            }
+
+            function isEmpty(value) {
+                value = value.replace(/[ ]/g, '');
+                if (value.length < 1) {
+                    return true;
+                }
+                return false;
+            }
+
+            //添加千分位分隔符
+
+            function count(str) {
+                //var str='12345678.111';
+                //小数点后的数字
+                var floatStr = '';
+                //小数点前的数字
+                var strStart = '';
+                var num = 0;
+                if ((num = str.indexOf('.')) != -1) {
+                    var strList = str.split('.');
+                    strStart = strList[0];
+                    floatStr = strList[1];
+                }
+                var strNew = '';
+                var forLength = strStart.length / 3;
+                for (var i = 0; i < forLength; i++) {
+                    //结尾
+                    var strEndNow = strStart.substring(strStart.length - 3, strStart.length);
+                    var strStartNow = strStart.substring(0, strStart.length - 3);
+                    strStart = strStartNow;
+                    if (strNew != '') {
+                        strNew = ',' + strNew;
+                    }
+                    strNew = strEndNow + strNew;
+                }
+
+                if (floatStr != '') {
+
+                    strNew = strNew + '.' + floatStr;
+
+                }
+                return strNew;
+            }
+
+//            var num = new Number(201612171112300911052672).to;
+//            alert(num);
+
+//            201612171112300920000000
+
+//            var address = new Array();
+//            address = 201612171112300911052672;
+//            var num = 201612171112300911052672+'';
+//            var num = "201612171112300911052672";
+//            console.log(address)
+//            alert(num);
+//            var num = String(201612171112300911052672 + '')
+//            var ss = num.split("");
+//            for (var s in ss) {
+//                console.log(ss[s]);
+//            }
+
+
+            var timer = null;  // 定时器
+            var yd = null;
+            var top = null;
+            scrollcenter();
+
+            setInterval()
+
+            window.onresize = scrollcenter;
+
+            function scrollcenter() {
+                clearInterval(timer);
+//                move();
+                var pic = document.getElementById("pic");
+                var width11 = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+                top = parseInt((width11 - pic.offsetHeight) / 2);
+                pic.style.top = top + "px";
+                yd = top;
+
+                window.onscroll = function () {
+
+                    move();
+
+                }
+
+                function move() {
+                    var scy = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                    var md = scy + top;
+
+                    clearInterval(timer);
+                    timer = setInterval(function () {
+
+                        yd = yd + (md - yd) / 10;
+                        pic.style.top = yd + "px";
+
+                    }, 30);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<img src="../images/aside.jpg" alt="" id="pic"/>
+
+<div class="w neir">
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+    test123123123123</br>
+</div>
+</body>
+
+</html>

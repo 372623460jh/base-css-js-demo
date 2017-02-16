@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #box {
+            top: 100px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            background-color: #ff0;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            $("move1").onclick = function () {
+                move($("box"), {width: 100, height: 200, left: 200, top: 20, zIndex: 3, opacity: 30},function(){
+                    //回调方法
+//                    move($("box"), {width: 400, height: 300, left: 800, top: 300, opacity: 100});
+                });
+            }
+            $("move2").onclick = function () {
+                move($("box"), {width: 400, height: 300, left: 800, top: 300, opacity: 100});
+            }
+        }
+
+        //移动的方法
+        function move(obj, json,fn) {
+
+            //清除定时器
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+
+                var isOK = true;
+                for (var attr in json) {
+                    //获取目标位置
+                    var target = json[attr];
+                    //获取现在的位置
+                    var now = 0;
+                    if (attr == "opacity") {
+                        now = parseInt(getStyle(obj, attr) * 100);
+                    } else {
+                        now = parseInt(getStyle(obj, attr));
+                    }
+                    //计算步长
+                    var step = (target - now) / 10;
+                    step = step < 0 ? Math.floor(step) : Math.ceil(step);
+                    //根据不同属性调整数值（zindex不需要渐变，opacity不需要加单位，其他要加px）
+                    if (attr == "zIndex") {
+                        obj.style[attr] = json[attr];
+                    } else if (attr == "opacity") {
+                        if ("opacity" in obj.style) {
+                            obj.style.opacity = (now + step) / 100;
+                        } else {
+                            obj.style.filter = "alpha(opacity = " + (now + step) + ")";
+                        }
+                    }
+                    else {
+                        obj.style[attr] = now + step + "px";
+                    }
+                    //判断是否到达目的地
+                    if (now != json[attr]) {
+                        isOK = false;
+                    }
+                }
+
+                //是否清除线程和执行回调
+                if (isOK) {
+                    clearInterval(obj.timer);
+                    if(fn){
+                        fn();
+                    }
+                }
+
+            }, 30);
+        }
+
+        //获取属性(obj元素对象，attr获取的属性名)
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];//ie
+            } else {
+                return window.getComputedStyle(obj, null)[attr];//w3c
+            }
+        }
+
+
+        //获取元素
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+    </script>
+
+</head>
+<body>
+<input id="move1" type="button" value="移动1"/>
+<input id="move2" type="button" value="移动2"/>
+
+<div id="box"></div>
+</body>
+</html>

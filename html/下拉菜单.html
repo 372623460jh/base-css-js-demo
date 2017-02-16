@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .xiala {
+            height: 30px;
+            width: 330px;
+            margin: 100px auto 0;
+            background-image: url(../images/bg.jpg);
+            padding-left: 10px;
+        }
+
+        .xiala li {
+            float: left;
+            margin-right: 10px;
+            height: 30px;
+            width: 100px;
+            background-image: url(../images/libg.jpg);
+        }
+
+        .xiala a {
+            height: 30px;
+            width: 100px;
+            display: block;
+            text-decoration: none;
+            color: #000;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .xiala li ul {
+            display: none;
+        }
+    </style>
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+//            $(".xiala li").mouseover(function(){
+//                $(this).children("ul").show();
+//            });
+//            $(".xiala li").mouseout(function(){
+//                $(this).children("ul").hide();
+//            });
+
+//            $(".xiala li").mouseenter(function(){
+//                $(this).children("ul").show();
+//            });
+//            $(".xiala li").mouseleave(function(){
+//                $(this).children("ul").hide();
+//            });
+
+//            $(".xiala li").hover(function () {
+//                $(this).children("ul").show();
+//            }, function () {
+//                $(this).children("ul").hide();
+//            });
+
+//            $(".xiala li").hover(function () {
+//                var yc = $(this).children("ul");
+//                if(yc.css("display") === "block")
+//                {
+//                    yc.hide();
+//                }else{
+//                    yc.show();
+//                }
+//            });
+
+            //加了流量限制的消息响应
+            var timer = null;
+            var that = null;
+            $(".xiala li").mouseenter(function () {
+                clearTimeout(timer);
+                that = $(this);
+                timer = setTimeout(function(){
+                    that.children("ul").show();
+                },200);
+            });
+            $(".xiala li").mouseleave(function () {
+                clearTimeout(timer);
+                $(this).children("ul").hide();
+            });
+            document.querySelector()
+        });
+
+    </script>
+
+</head>
+<body>
+<div class="xiala">
+    <ul>
+        <li>
+            <a href="#">一级菜单1</a>
+            <ul>
+                <li><a href="#">二级菜单1</a></li>
+                <li><a href="#">二级菜单2</a></li>
+                <li><a href="#">二级菜单3</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">一级菜单2</a>
+            <ul>
+                <li><a href="#">二级菜单1</a></li>
+                <li><a href="#">二级菜单2</a></li>
+                <li><a href="#">二级菜单3</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">一级菜单3</a>
+            <ul>
+                <li><a href="#">二级菜单1</a></li>
+                <li><a href="#">二级菜单2</a></li>
+                <li><a href="#">二级菜单3</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <style>
+
+        .div {
+            height: 500px;
+        }
+        .box {
+            width: 800px;
+            height: 400px;
+            margin: 0 auto;
+            background-color: #987987;
+            position: relative;
+        }
+        .pic {
+            width: 800px;
+            height: 400px;
+            background-image: url(../images/1.png);
+        }
+        .picnum {
+            width: 18px;
+            height: 18px;
+            background-color: #765765;
+            border-radius: 9px;
+            margin-left: 5px;
+            margin-right: 5px;
+            float: left;
+            cursor: pointer;
+            color: #fff;
+            font:400 12px/18px "微软雅黑";
+            text-align: center;
+        }
+
+        .num {
+            position: absolute;
+            bottom: 20px;
+            left:50%;
+            margin-left: -80px;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function(){
+
+            var picpath = ["../images/2.png","../images/3.png","../images/4.png","../images/5.png"];
+
+            showShufflengFigure(picpath)
+
+            function showShufflengFigure( picp )
+            {
+                var picnum = picpath.length;
+                var lbt = document.getElementById("lbt");
+                var pic = document.getElementsByClassName("pic");
+                var num = document.getElementsByClassName("num");
+                for(var n=0;n<picnum;n++)
+                {
+                    var clone = pic[0].cloneNode();
+                    clone.style.backgroundImage = "url("+picpath[n]+")";
+//                    clone.backgroundImage = picpath[n];
+                    clone.style.display = "none";
+                    clone.id = "picc"+(n+2);
+                    lbt.appendChild(clone);
+                    var clone1 = document.getElementsByClassName("picnum")[0].cloneNode(true);
+                    clone1.innerHTML = n+2;
+                    clone1.id = "picnumm"+(n+2);
+                    num[0].appendChild(clone1);
+
+                }
+            }
+            var pic = document.getElementsByClassName("pic");
+            var num = document.getElementsByClassName("num");
+            for(var s = 0;s<num.length;s++)
+            {
+                num[s].onclick = function (){
+                    for(var x = 0;x<pic.length;x++)
+                    {
+                        pic[x].style.display = "none";
+                    }
+                    pic[s].style.display = "";
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div class="w div">
+    <div class="box" id="lbt" >
+        <div class="pic" id = "picc1"></div>
+        <ul class="num">
+            <li class="picnum" id="picnumm1">1</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

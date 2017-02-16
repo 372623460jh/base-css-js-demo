@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: #ccc;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+
+        #chose {
+            width: 300px;
+            margin-left: 50px;
+            margin-top: 50px;
+        }
+
+        #nochose {
+            width: 300px;
+            margin-top: 200px;
+            margin-left: 50px;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function () {
+
+            function $(id) {
+                return document.getElementById(id)
+            }
+
+            $("chose").onmouseup = function (event) {
+
+                var event = event || window.event;
+                var x = event.clientX;
+                var y = event.clientY;
+                var text = window.getSelection().toString() || document.selection.createRange().text;
+                if (text) {
+                    show(x, y, text);
+                }
+            }
+
+//            document.onmousedown = function (event){
+//                var event = event||window.event;
+//                var targetId = event.target ? event.target.id : event.srcElement.id;
+//                if(targetId != "box"){
+//                    $("box").style.display="none";
+//                }
+//            }
+
+
+            $("box").onmousedown = function (event) {
+                var event = event||window.event;
+                //阻止冒泡
+                if(event.stopPropagation)
+                {
+                    event.stopPropagation();
+                }else
+                {
+                    event.cancelBubble = "true";
+                }
+            }
+
+            document.onmousedown = function (event) {
+                $("box").style.display = "none";
+            }
+
+            function show(x, y, text) {
+                setTimeout(function () {
+                    $("box").style.display = "block";
+                    $("box").style.left = x + "px";
+                    $("box").style.top = y + "px";
+                    $("box").innerHTML = text;
+                }, 300)
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+<span id="box"></span>
+
+<div id="chose">我是可以复制的我是可以复制的我是可以复制的我是可以复制的我是可以复制的我是可以复制的我是可以复制的我是可以复制的我是可以复制的我是可以复制的我是可以复制的</div>
+<div id="nochose">我是不可以复制的我是不可以复制的我是不可以复制的我是不可以复制的我是不可以复制的我是不可以复制的我是不可以复制的我是不可以复制的我是不可以复制的我是不可以复制的</div>
+</body>
+</html>

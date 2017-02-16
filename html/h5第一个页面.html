@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .test1{
+            -webkit-appearance:none;
+            width: 200px;
+        }
+        .test1 option{
+
+            background-color: #ff0;
+        
+        }
+        .test1 option:hover{
+
+            background-color: #0f0;
+
+        }
+        .test1 option:checked{
+
+            background-color: #f00;
+
+        }
+        select::-ms-expand { display: none; }
+
+    </style>
+</head>
+<body>
+<select class = "test1">
+    <option class = "test2" value ="volvo">Volvo</option>
+    <option value ="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+</select>
+</body>
+</html>

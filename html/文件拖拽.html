@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <style>
+        #target {
+            padding: 20px;
+            height: 300px;
+            border: 5px dashed #c0c0c0;
+            color: #e0e0e0;
+            font-size: 40px;
+            line-height: 260px;
+            text-align: center;
+            -webkit-user-select: none;
+            cursor: pointer;
+        }
+
+        #target.actived {
+            border-color: #888;
+            color: #eaeaea;
+            box-shadow: 0 0 80px #e0e0e0 inset;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>Drag&Drop</h1>
+    </div>
+    <div class="jumbotron">
+        <p>你好啊，你今年几岁啊，哈哈，我的今天在哪里</p>
+        <img src="../images/toy.png" alt="">
+    </div>
+    <div id="target">
+        Drag something into here
+    </div>
+    <ul id="result" class="list-group"></ul>
+
+    <div class="box">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>
+<script>
+
+    (function () {
+
+        var target = document.querySelector("#target");
+        var fileList = document.querySelector("#result");
+
+        target.addEventListener('dragenter', function () {
+            this.classList.add('actived');
+        });
+        target.addEventListener('dragleave', function () {
+            this.classList.remove('actived');
+        });
+        target.addEventListener('dragover', function (e) {
+            //阻止自带事件 如a标签的跳转
+            e.preventDefault();
+            //阻止冒泡
+            e.stopPropagation();
+        });
+
+        target.addEventListener('drop', function (e) {
+
+            this.classList.remove('actived');
+            if (e.dataTransfer.files.length > 0) {
+                for (var i = 0; i < e.dataTransfer.files.length; i++) {
+                    var files = e.dataTransfer.files;
+                    var li = document.createElement('li');
+                    li.setAttribute('class', 'list-group-item');
+                    // 创建信息的子节点
+                    li.innerHTML = '<h5 class="list-group-item-heading">' + files[i].name + '</h5><p class="list-group-item-text">' + files[i].lastModifiedDate.toLocaleDateString() + ' ' + files[i].lastModifiedDate.toLocaleTimeString() + ' ' + (files[i].size / 1024).toFixed(2) + 'KB</p>';
+                    fileList.appendChild(li);
+                }
+            } else {
+                var data = e.dataTransfer.getData("text/plain");
+                if (data) {
+                    //说明拖拽的是文字
+                    target.innerHTML = data;
+                } else {
+                    var img = document.createElement('img');
+                    img.src = e.dataTransfer.getData('text/uri-list');
+                    target.appendChild(img);
+                }
+            }
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    })();
+
+</script>
+

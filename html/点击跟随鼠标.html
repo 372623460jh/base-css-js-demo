@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #image {
+            left: 100px;
+            top:500px;
+            width: 200px;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+
+            var image = document.getElementById("image");
+            var movex = image.offsetLeft-image.offsetWidth/2;//单前已经移动的位置X
+            var movey = image.offsetTop-image.offsetHeight/2;//单前已经移动的位置Y
+            var mdx = image.offsetLeft-image.offsetWidth/2;//目的位置的x，y
+            var mdy = image.offsetTop-image.offsetHeight/2;//目的位置的x，y
+
+            document.onclick = function (event) {
+                var event = event || window.event;
+                mdx = event.clientX - image.offsetWidth / 2;
+                mdy = event.clientY - image.offsetHeight / 2;
+            }
+
+            setInterval(function () {
+
+                movex = movex + (mdx - movex) / 10;
+                movey = movey + (mdy - movey) / 10;
+
+                image.style.left = movex + "px";
+                image.style.top = movey + "px";
+
+            }, 30);
+
+        }
+    </script>
+</head>
+<body>
+<img src="../images/img.jpg" alt="" id="image"/>
+</body>
+</html>

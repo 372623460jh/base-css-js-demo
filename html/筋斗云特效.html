@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            background: #000;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 800px;
+            height: 42px;
+            border-radius: 5px;
+            margin: 100px auto;
+            background: url(../images/rss.png) no-repeat right center #fff;
+            position: relative;
+        }
+
+        .box ul li {
+            width: 83px;
+            height: 42px;
+            line-height: 42px;
+            float: left;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .box ul li:hover {
+            color: #eee;
+        }
+
+        .box ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #cloud {
+            width: 83px;
+            height: 42px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url(../images/cloud.gif) no-repeat;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+
+            var cloud = document.getElementById("cloud");
+            var lis = document.getElementsByClassName("ullist")[0].childNodes;
+            var nowz = 0;//当前点的
+
+            for(var n = 0;n<lis.length;n++)
+            {
+                lis[n].onclick = function(){
+                    nowz = this.offsetLeft;
+                }
+                lis[n].onmouseout = function(){
+                    target = nowz;
+                }
+                lis[n].onmouseover = function(){
+                    target = this.offsetLeft;
+                }
+            }
+
+            //缓动公式
+            var leader = 0;//
+            var target = 0;//移动的目的地距离原点的X值
+            setInterval(function(){
+                leader = leader + (target - leader)/10;
+                cloud.style.left = leader+"px";
+            },20);
+        }
+     </script>
+
+</head>
+<body>
+<div class="box">
+    <span id = "cloud"></span>
+    <ul class="ullist">
+        <li>首页新闻</li>
+        <li>师资力量</li>
+        <li>活动策划</li>
+        <li>企业文化</li>
+        <li>招聘信息</li>
+        <li>公司简介</li>
+        <li>上海校区</li>
+        <li>广州校区</li>
+    </ul>
+</div>
+</body>
+</html>

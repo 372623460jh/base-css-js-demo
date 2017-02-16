@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 450px;
+            height: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .head {
+            height: 60px;
+            background-color: #ff0000;
+        }
+
+        .content {
+            height: 60px;
+            flex: 1;
+            display: flex;
+            background-color: #ffff00;
+        }
+
+        .content .left {
+            flex: 1;
+            background-color: #f00f00;
+        }
+
+        .content .right {
+            flex: 2;
+            background-color: #0fff00;
+        }
+
+        .floot {
+            height: 60px;
+            display: flex;
+            background-color: #00ffff;
+        }
+
+        .floot .db {
+            border: 1px solid #123123;
+            flex: 1;
+            text-align: center;
+            line-height: 60px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="head"></div>
+    <div class="content">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <div class="floot">
+        <div class="db">我的</div>
+        <div class="db">你的</div>
+        <div class="db">购物车</div>
+        <div class="db">上的</div>
+    </div>
+</div>
+</body>
+</html>

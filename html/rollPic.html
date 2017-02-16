@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/base.css"/>
+    <style>
+        .rowPic {
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .bpic {
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .apic {
+            width: 1200px;
+            height: 200px;
+            position: absolute;
+        }
+
+        .apoint {
+            width: 300px;
+            height: 200px;
+            position: relative;
+        }
+
+        .pic li {
+            float: left;
+        }
+
+        .point li {
+            float: left;
+        }
+
+        .point li span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: #765765;
+            border-radius: 5px;
+            float: left;
+            cursor: pointer;
+            margin: 0 3px 0 3px;
+        }
+
+        .point {
+            position: absolute;
+            left: 50%;
+            margin-left: -30px;
+            bottom: 10px;
+        }
+
+        .pic {
+            background-color: #888888;
+            position: absolute;
+            left: -300px;
+        }
+
+    </style>
+    <script>
+
+        window.onload = function () {
+
+
+            //移动的初始位置
+            var mx = 0;
+            //图片长度
+            var picwidth = 300;
+            //移动速度
+            var sudu = 10;
+            //图片移动距离
+            var movec = 0;
+            //移动的元素
+            var apic = document.getElementsByClassName("apic")[0];
+            //图片数量
+            var picnum = 4;
+            //单前显示图片
+            var nowpic = 0;
+
+            move();
+
+            //移动方法带减速效果
+            function jsmove() {
+                var movetest = setInterval(function () {
+                    //该图片的已经移动到了最左侧
+                    movec = movec + (picwidth - movec) / sudu;
+                    if(movec >= picwidth-1)
+                    {
+                        movec = 0;
+                        apic.style.left = (mx-picwidth) + "px";
+                        clearInterval(movetest);
+                    }else
+                    {
+//                        window.console.log(mx-movec);
+                        apic.style.left = (mx-movec) + "px";
+                    }
+                }, 50);
+            }
+
+            //移动的方法
+            function move() {
+                //切换图片的方法width是图片宽度，picnum是图片数量,sudu是却换速度的特效
+                setTimeout(function () {
+                    if (nowpic == picnum-1 ) {
+                        nowpic = -1;
+                    }
+                    //初始化参数
+                    mx = - picwidth*nowpic;
+                    movec = 0;
+                    jsmove();
+                    nowpic++;
+                    move();
+                }, 5000);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div class="w rowPic">
+    <div class="bpic">
+        <div class="apic">
+            <ul class="pic">
+                <li><img src="../images/04.jpg" alt=""/></li>
+                <li><img src="../images/01.jpg" alt=""/></li>
+                <li><img src="../images/02.jpg" alt=""/></li>
+                <li><img src="../images/03.jpg" alt=""/></li>
+                <li><img src="../images/04.jpg" alt=""/></li>
+            </ul>
+        </div>
+        <div class="apoint">
+            <ul class="point">
+                <li><span></span></li>
+                <li><span></span></li>
+                <li><span></span></li>
+                <li><span></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

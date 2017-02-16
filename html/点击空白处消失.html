@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        body {
+            padding: 0;
+            margin: 0;
+            height: 2000px;
+        }
+
+        #mask {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+            background-color: #000;
+            display: none;
+        }
+
+        #show {
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            position: fixed;
+            margin-left: -150px;
+            margin-top: -150px;
+            background-color: #fff;
+            display: none;
+        }
+
+
+    </style>
+    <script>
+
+        window.onload = function(){
+
+            var login = document.getElementById("login");
+            var mask = document.getElementById("mask");
+            var show = document.getElementById("show");
+            login.onclick = function(event){
+
+                var event = event||window.event;
+                mask.style.display = "block";
+                show.style.display = "block";
+                document.body.style.overflow = "hidden";
+                //阻止冒泡
+                if(event.stopPropagation)
+                {
+                    event.stopPropagation();
+                }else
+                {
+                    event.cancelBubble = "true";
+                }
+            }
+            document.onclick = function(event){
+
+                var event = event||window.event;
+                var targetid = event.target?event.target.id:event.srcElement.id;
+                if(targetid != "show")
+                {
+                    mask.style.display = "none";
+                    show.style.display = "none";
+                    document.body.style.overflow = "visible";
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+<a href="javascript:;" id ="login">注册</a>
+<div id="mask"></div>
+<div id="show"></div>
+</body>
+</html>

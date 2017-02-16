@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .box {
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+
+        .lou {
+            width: 400px;
+            height: 20px;
+            border: 1px solid #000;
+            float: left;
+            margin-top: 5px;
+        }
+
+        .lou div {
+            float: left;
+            width: 300px;
+            height: 20px;
+        }
+        .lou input {
+            float: right;
+        }
+
+    </style>
+
+    <script>
+
+        window.onload = function(){
+            var tj = document.getElementById("tijiao");
+            var wb = document.getElementById("wbcontext");
+            tj.onclick = function(){
+
+                var d1 = document.createElement("div")
+                var d2 = document.createElement("div")
+                var i1 = document.createElement("input")
+                d1.setAttribute("class","lou");
+                d2.innerHTML = wb.value;
+                i1.setAttribute("type","button");
+                i1.setAttribute("value","删除");
+                i1.setAttribute("class","sc");
+                d1.appendChild(d2);
+                d1.appendChild(i1);
+                document.getElementsByClassName("box")[0].appendChild(d1);
+
+                var sc = document.getElementsByClassName("sc");
+                for(var n=0;n<sc.length;n++)
+                {
+                    sc[n].onclick = function(){
+                        this.parentNode.remove();
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="box">
+        发布内容：<textarea name="wbcontext" id="wbcontext" cols="30" rows="10"></textarea>
+        <input type="button" id="tijiao"  value="提交"/>
+<!--        <div class="lou">
+            <div>内容</div>
+            <input type="button" value="删除"/>
+        </div>
+        <div class="lou">
+            <div>内容</div>
+            <input type="button" value="删除"/>
+        </div>
+        <div class="lou">
+            <div>内容</div>
+            <input type="button" value="删除"/>
+        </div>-->
+    </div>
+
+</body>
+</html>
